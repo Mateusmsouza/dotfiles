@@ -46,3 +46,9 @@
     path: ~/.zshrc
     line: "alias g='git'"
     create: yes
+
+- name: Add g=git alias in bashrc
+  lineinfile:
+    path: ~/.bashrc
+    line: "alias g='git'"
+    create: yes
