@@ -1,6 +1,6 @@
 - name: Executar comando simples
   hosts: local
-  gather_facts: no
+  gather_facts: yes
 
   tasks:
     - name: Rodar uptime
@@ -10,3 +10,6 @@
     - name: Mostrar saída
       debug:
         var: resultado.stdout
+
+  roles:
+    - git

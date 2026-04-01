@@ -1,0 +1,48 @@
+#SPDX-License-Identifier: MIT-0
+---
+# tasks file for git
+- name: install git (Debian/Ubuntu)
+  become: yes
+  apt:
+    name: git
+    state: present
+    update_cache: yes
+  when: ansible_os_family == "Debian"
+
+- name: set username
+  git_config:
+    name: user.name
+    value: "{{ git_user_name }}"
+    scope: global
+
+- name: set email
+  git_config:
+    name: user.email
+    value: "{{ git_user_email }}"
+    scope: global
+
+- name: set default cmmit message editor
+  git_config:
+    name: core.editor
+    value: "{{ git_default_editor }}"
+    scope: global
+
+- name: set git aliases
+  git_config:
+    name: "alias.{{ item.key }}"
+    value: "{{ item.value }}"
+    scope: global
+  loop:
+    - { key: "co", value: "checkout" }
+    - { key: "br", value: "branch" }
+    - { key: "ci", value: "commit" }
+    - { key: "st", value: "status" }
+    - { key: "cm", value: "commit -m" }
+    - { key: "am", value: "commit -a -m" }
+    - { key: "lg", value: "log --oneline --graph --decorate" }
+
+- name: Add g=git alias in zshrc
+  lineinfile:
+    path: ~/.zshrc
+    line: "alias g='git'"
+    create: yes
