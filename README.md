@@ -6,4 +6,6 @@ My configs for zshell and tmux
 ```shell
 $ chmod +x install_ansible.sh
 $ ./install_ansible.sh
+
+$ cd ansible && ansible-playbook -i hosts.ini playbook.yml
 ```

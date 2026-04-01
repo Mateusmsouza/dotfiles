@@ -1,0 +1,12 @@
+- name: Executar comando simples
+  hosts: local
+  gather_facts: no
+
+  tasks:
+    - name: Rodar uptime
+      command: uptime
+      register: resultado
+
+    - name: Mostrar saída
+      debug:
+        var: resultado.stdout
